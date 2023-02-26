@@ -2,34 +2,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 void PrintTeam(string);
-class Team {
-  private :
-    string name;
-    int score;
-  public :
-    Team() {
-        this->name = "";
-        this->score = 0;
-    }
-    Team(string a) {
-        this->name = a;
-    }
-    string get_name() {
-        return this->name;
-    }
-    int get_score() {
-        return this->score;
-    }
-    void set_name(string a) {
-        this->name = a;
-    }
-    void set_score(int a) {
-        this->score = a;
-    }
-    void show_name() {
-        PrintTeam(this->name);
-    }
-};
 void IPL();
 void MI();
 void GT();
@@ -42,8 +14,6 @@ void RCB();
 void KKR();
 void KXIP();
 void color(string);
-void shuffle(vector<int>& a);
-void round(vector<Team>& T, vector<int>& b, int& n, int& firstround);
 int main() {
     srand(time(0));
     vector<string> a = {
@@ -71,6 +41,7 @@ int main() {
                 cout << " ";
             cout << "   " << i + 1 << ". ";
             if(i < n-1) {
+                // cout << a[i];
                 PrintTeam(a[i]);
                 if(n == 2) {
                     color("Light Green");
@@ -91,6 +62,7 @@ int main() {
                     cout << "Eliminated.";   
                 }
                 else {
+                    // cout << a[i];
                     PrintTeam(a[i]);
                 }  
             }
@@ -101,104 +73,7 @@ int main() {
         first = 0;
         getchar();
     }
-    // vector<int> b(n);
-    // for(int i = 0; i < n; i++)
-    //     b[i] = i + 1;
-    // vector<Team> T(n);
-    // for(int i = 0; i < n; i++)
-    //     T[i].set_name(a[i]);
-    // int firstround = 1;
-    // cout << "\n    ";
-    // IPL();
-    // getchar();
-    // cout << "\n\n";
-    // while(n != 1) {
-    //     system("cls");
-    //     cout << "\n    ";
-    //     IPL();
-    //     cout << "\n\n\n";
-    //     round(T, b, n, firstround);
-    //     getchar();
-    //     cout << "\n";
-    //     b.pop_back();
-    // }
-    // getchar();
     return 0;
-}
-void shuffle(vector<int>& a) {
-    random_shuffle(a.begin(), a.end());
-}
-void round(vector<Team>& T, vector<int>& b, int& n, int& firstround) {
-    shuffle(b);
-    // couting score;
-    for(int i = 0; i < n; i++) {
-        T[i].set_score(T[i].get_score() + b[i]);
-    }
-    // sorting
-    for(int i = 0; i < n; i++) {
-        for(int j = i + 1; j < n; j++) {
-            if(T[j].get_score() > T[i].get_score()) {
-                // curpos
-                Team temp = T[i];
-                T[i] = T[j];
-                T[j] = temp;
-            }
-        }
-    }
-    // display
-    int m;
-    if(firstround)
-        m = n;
-    else
-        m = n - 1;
-    for(int i = 0; i < m; i++) {
-        cout << "   ";
-        if(i < T.size() - 1)
-            cout << " ";
-        cout << i + 1 << ". ";
-        T[i].show_name();
-        for(int space = 1; space <= 35 - (T[i].get_name()).size(); space++) {
-            cout << " ";
-        }
-        if(n != 2)
-            cout << T[i].get_score();
-        else {
-            color("Light Green");
-            cout << "!! Winner !!";
-            color("White");
-        }
-        if(firstround) {
-            getchar();
-            cout << endl;
-        }
-        else {
-            if(i != T.size() - 1)
-                cout << "\n\n";
-        }
-    }
-    // eliminated
-    if(firstround)
-        m = n;
-    else
-        m = n - 1;
-    color("Black");
-    for(int i = m; i < T.size(); i++) {
-        if(i < 9)
-            cout << " ";
-        cout << "   ";
-        cout << i + 1 << ". ";
-        cout << T[i].get_name();
-        for(int space = 1; space <= 35 - (T[i].get_name()).size(); space++) {
-            cout << " ";
-        }
-        cout << "Eliminated.";
-        if(i != T.size() - 1)
-            cout << "\n\n";
-    }
-    color("White");
-    if(!firstround)
-        n--;
-    firstround = 0;
 }
 void color(string c) {
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
