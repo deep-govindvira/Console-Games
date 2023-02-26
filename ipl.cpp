@@ -43,7 +43,6 @@ void KKR();
 void KXIP();
 void color(string);
 void shuffle(vector<int>& a);
-void firstround(vector<Team>& T, vector<int>& b, int& n);
 void round(vector<Team>& T, vector<int>& b, int& n, int& firstround);
 int main() {
     srand(time(0));
