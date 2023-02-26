@@ -58,6 +58,7 @@ int main() {
         "Royal Challengers Bangalore",
         "Sunrisers Hyderabad"
     };
+    int add = a.size();
     int n = a.size();
     vector<int> b(n);
     for(int i = 0; i < n; i++)
@@ -78,7 +79,10 @@ int main() {
         round(T, b, n, firstround);
         getchar();
         cout << "\n";
-        b.pop_back();
+        if(rand()%2)
+            b.pop_back();
+        else if(rand()%2)
+            b.push_back(++add);
     }
     getchar();
     return 0;
