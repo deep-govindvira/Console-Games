@@ -75,11 +75,24 @@ int main() {
         cout << "\n    ";
         IPL();
         cout << "\n\n\n";
-        if(n != 1)
+        if(n != 1) {
+            if(n > 5) {
+                color("Green");
+            }
+            else if(n > 2){
+                color("Yellow");
+            }
+            else {
+                color("Light Red");
+            }
             cout << "    Round - " << n << " : \n\n";
-        else
-            
+            color("White");
+        }
+        else {
+            color("Red");
             cout << "    Last Round : " << "\n\n";
+            color("White");
+        }
         shuffle(b);
         // couting score;
         for(int i = 0; i < T.size(); i++) {
@@ -113,7 +126,7 @@ int main() {
                 cout << " ";
             }
             if(n != 1)
-                cout << T[i].get_score();
+                cout << T[i].get_score() - T[3].get_score();
             else {
                 if(i < 4) {
                     color("Light Green");
@@ -140,7 +153,9 @@ int main() {
     }
     getchar();
 
+    color("Green");
     cout << "    Qualifier - 1 :    ";
+    color("White");
     PrintTeam(T[0].get_name());
     cout << "  v/s  ";
     PrintTeam(T[1].get_name());
@@ -159,7 +174,9 @@ int main() {
     cout << "\n";
     getchar();
 
+    color("Light Red");
     cout << "\n       Eliminator :    ";
+    color("White");
     PrintTeam(T[2].get_name());
     cout << "  v/s  ";
     PrintTeam(T[3].get_name());
@@ -175,7 +192,9 @@ int main() {
     cout << "\n";
     getchar();
 
+    color("Light Red");
     cout << "\n    Qualifier - 2 :    ";
+    color("White");
     PrintTeam(semifinalteam1);
     cout << "  v/s  ";
     PrintTeam(semifinalteam2);
@@ -193,7 +212,9 @@ int main() {
 
     string winner;
 
+    color("Red");
     cout << "\n            Final :    ";
+    color("White");
     PrintTeam(finalteam1);
     cout << "  v/s  ";
     PrintTeam(finalteam2);
