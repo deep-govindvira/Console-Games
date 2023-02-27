@@ -42,8 +42,6 @@ void RCB();
 void KKR();
 void KXIP();
 void color(string);
-void shuffle(vector<int>& a);
-void round(vector<Team>& T, vector<int>& b, int& n, int& firstround);
 int main() {
     srand(time(0));
     vector<string> a = {
@@ -60,179 +58,161 @@ int main() {
     };
     int n = a.size();
     vector<int> b(n);
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < n; i++) {
         b[i] = i + 1;
+    }
     vector<Team> T(n);
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < n; i++) {
         T[i].set_name(a[i]);
-    int firstround = 1;
-    cout << "\n    ";
-    IPL();
-    getchar();
-    cout << "\n\n";
-    while(n) {
+    }
+    int rounds = a.size();
+    int first = 1;
+    while(rounds) {
         system("cls");
         cout << "\n    ";
         IPL();
-        cout << "\n\n\n";
-        if(n != 1) {
-            if(n > 5) {
-                color("Green");
-            }
-            else if(n > 2){
-                color("Yellow");
-            }
-            else {
-                color("Light Red");
-            }
-            cout << "    Round - " << n << " : \n\n";
-            color("White");
+        if(first) {
+            getchar();
+        }
+        if(!first) {
+            cout << "\n";
+        }
+        if(rounds > 5) {
+            color("Green");
+        }
+        else if(rounds > 2) {
+            color("Yellow");
         }
         else {
             color("Red");
-            cout << "    Last Round : " << "\n\n";
-            color("White");
         }
-        shuffle(b);
-        // couting score;
+        cout << "\n\n" << "    Round - " << rounds << " :\n\n";
+        color("White");
+        // shuffle
+        random_shuffle(b.begin(), b.end());
+        // count score
         for(int i = 0; i < T.size(); i++) {
             T[i].set_score(T[i].get_score() + b[i]);
         }
-        // sorting
+        // sort
         for(int i = 0; i < T.size(); i++) {
             for(int j = i + 1; j < T.size(); j++) {
                 if(T[j].get_score() > T[i].get_score()) {
-                    // curpos
                     Team temp = T[i];
                     T[i] = T[j];
                     T[j] = temp;
                 }
             }
         }
-
+        // display
         for(int i = 0; i < T.size(); i++) {
-            if(i == 4) {
-                if(n != 1)
-                    cout << "    ----------------------------------------\n\n";
-                else
-                    cout << "    --------------------------------------------------------\n\n";
-            }
+            if(i != 9)
+                cout << " ";
             cout << "   ";
-            if(i < T.size() - 1)
-                cout << " ";
             cout << i + 1 << ". ";
-            T[i].show_name();
-            for(int space = 1; space <= 35 - (T[i].get_name()).size(); space++) {
+            PrintTeam(T[i].get_name());
+            for(int space = 1; space < 35 - (T[i].get_name()).size(); space++) {
                 cout << " ";
             }
-            if(n != 1)
-                cout << T[i].get_score() - T[3].get_score();
+            if(rounds != 1) {
+                cout << T[i].get_score() - T[3].get_score() << "\n\n";
+                if(i == 3) {
+                    cout << "    --------------------------------------------\n\n";
+                }
+            }
             else {
                 if(i < 4) {
                     color("Light Green");
-                    cout << "!! Qualified !!";
+                    cout << "!! Qualified !!\n\n";
                     color("White");
                 }
                 else {
                     color("Black");
-                    cout << "?? Disqualified ??";
+                    cout << "?? Disqualified ??\n\n";
                     color("White");
                 }
-            }
-            if(firstround) {
-                cout << "\n\n";
-            }
-            else {
-                if(i != T.size() - 1)
-                    cout << "\n\n";
+                if(i == 3) {
+                    cout << "    -------------------------------------------------------\n\n";
+                }
             }
         }
-        n--;
+        cout << "    ";
         getchar();
-        cout << "\n";
+        first = 0;
+        rounds--;
     }
-    getchar();
 
+    vector<Team> playoff(4);
+    for(int i = 0; i < 4; i++) {
+        playoff[i] = T[i];
+    }
+
+    getchar();
     color("Green");
     cout << "    Qualifier - 1 :    ";
     color("White");
-    PrintTeam(T[0].get_name());
+    PrintTeam(playoff[0].get_name());
     cout << "  v/s  ";
-    PrintTeam(T[1].get_name());
+    PrintTeam(playoff[1].get_name());
     getchar();
-    string finalteam1, finalteam2, semifinalteam1,semifinalteam2;
     if(rand()%2) {
-        finalteam1 = T[0].get_name();
-        semifinalteam1 = T[1].get_name();
-    }
-    else {
-        finalteam1 = T[1].get_name();
-        semifinalteam1 = T[0].get_name();
+        Team temp = playoff[0];
+        playoff[0] = playoff[1];
+        playoff[1] = temp;
     }
     cout << "\n           Winner :    ";
-    PrintTeam(finalteam1);
-    cout << "\n";
+    PrintTeam(playoff[0].get_name());
+    cout << "\n    ";
     getchar();
 
     color("Light Red");
     cout << "\n       Eliminator :    ";
     color("White");
-    PrintTeam(T[2].get_name());
+    PrintTeam(playoff[2].get_name());
     cout << "  v/s  ";
-    PrintTeam(T[3].get_name());
+    PrintTeam(playoff[3].get_name());
     getchar();
     if(rand()%2) {
-        semifinalteam2 = T[2].get_name();
-    }
-    else {
-        semifinalteam2 = T[3].get_name();
+        Team temp = playoff[2];
+        playoff[2] = playoff[3];
+        playoff[3] = temp;
     }
     cout << "\n           Winner :    ";
-    PrintTeam(semifinalteam2);
-    cout << "\n";
+    PrintTeam(playoff[2].get_name());
+    cout << "\n    ";
     getchar();
 
     color("Light Red");
     cout << "\n    Qualifier - 2 :    ";
     color("White");
-    PrintTeam(semifinalteam1);
+    PrintTeam(playoff[1].get_name());
     cout << "  v/s  ";
-    PrintTeam(semifinalteam2);
+    PrintTeam(playoff[2].get_name());
     getchar();
     if(rand()%2) {
-        finalteam2 = semifinalteam1;
-    }
-    else {
-        finalteam2 = semifinalteam2;
+        Team temp = playoff[1];
+        playoff[1] = playoff[2];
+        playoff[2] = temp;
     }
     cout << "\n           Winner :    ";
-    PrintTeam(finalteam2);
-    cout << "\n";
+    PrintTeam(playoff[1].get_name());
+    cout << "\n    ";
     getchar();
-
-    string winner;
 
     color("Red");
     cout << "\n            Final :    ";
     color("White");
-    PrintTeam(finalteam1);
+    PrintTeam(playoff[0].get_name());
     cout << "  v/s  ";
-    PrintTeam(finalteam2);
+    PrintTeam(playoff[1].get_name());
     getchar();
     if(rand()%2) {
-        winner = finalteam1;
-    }
-    else {
-        winner = finalteam2;
+        playoff[0] = playoff[1];
     }
     cout << "\n           Winner :    ";
-    PrintTeam(winner);
+    PrintTeam(playoff[0].get_name());
+    cout << "\n    ";
     getchar();
-
-    return 0;
-}
-void shuffle(vector<int>& a) {
-    random_shuffle(a.begin(), a.end());
 }
 void color(string c) {
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
