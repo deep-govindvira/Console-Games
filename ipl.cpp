@@ -67,7 +67,7 @@ int main() {
     }
     int rounds = a.size();
     int first = 1;
-    while(rounds) {
+    while(rounds != -1) {
         system("cls");
         cout << "\n    ";
         IPL();
@@ -114,7 +114,7 @@ int main() {
             for(int space = 1; space < 35 - (T[i].get_name()).size(); space++) {
                 cout << " ";
             }
-            if(rounds != 1) {
+            if(rounds != 0) {
                 cout << T[i].get_score() - T[3].get_score() << "\n\n";
                 if(i == 3) {
                     cout << "    --------------------------------------------\n\n";
