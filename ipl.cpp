@@ -935,13 +935,13 @@ void four() {
 
 void set_fav() {
     fav.push_back("Chennai Super Kings");
-    // fav.push_back("Gujarat Titans");
-    // fav.push_back("Royals Challengers Bangalore");
-    // fav.push_back("Sunrisers Hyderabad");
-    // fav.push_back("Kolkata Knight Riders");
-    // fav.push_back("Lucknow Super Giants");
-    // fav.push_back("Punjab Kings");
-    // fav.push_back("Rajasthan Royals");
-    // fav.push_back("Delhi Capitals");
-    // fav.push_back("Mumbai Indians");
+    fav.push_back("Gujarat Titans");
+    fav.push_back("Royal Challengers Bangalore");
+    fav.push_back("Sunrisers Hyderabad");
+    fav.push_back("Kolkata Knight Riders");
+    fav.push_back("Lucknow Super Giants");
+    fav.push_back("Punjab Kings");
+    fav.push_back("Rajasthan Royals");
+    fav.push_back("Delhi Capitals");
+    fav.push_back("Mumbai Indians");
 }
