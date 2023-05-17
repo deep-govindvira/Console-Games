@@ -7,6 +7,8 @@ using namespace std;
 int Run();
 
 int sp = 6;
+vector<string> fav;
+
 
 struct Team;
 struct Match;
@@ -30,20 +32,7 @@ void four();
 void zero();
 void Print_run(int);
 void color(string);
-
-
-vector<string> fav = {
-    "Chennai Super Kings"
-    // "Gujarat Titans",
-    // "Royal Challengers Bangalore",
-    // "Sunrisers Hyderabad",
-    // "Kolkata Knight Riders"
-    // "Lucknow Super Giants",
-    // "Punjab Kings",
-    // "Rajasthan Royals",
-    // "Delhi Capitals",
-    // "Mumbai Indians"
-};
+void set_fav();
 
 int mx_six = 0;
 int mx_four = 0;
@@ -647,6 +636,7 @@ struct IPL {
 int main() {
     srand(time(0));
     IPL Season_2023;
+    set_fav();
     Season_2023.ipl();
     // Match a("Chennai Super Kings", "Kolkata Knight Riders");
     // cout << endl;
@@ -941,4 +931,17 @@ void four() {
     color("Yellow");
     cout << "4";
     color("White");
+}
+
+void set_fav() {
+    fav.push_back("Chennai Super Kings");
+    // fav.push_back("Gujarat Titans");
+    // fav.push_back("Royals Challengers Bangalore");
+    // fav.push_back("Sunrisers Hyderabad");
+    // fav.push_back("Kolkata Knight Riders");
+    // fav.push_back("Lucknow Super Giants");
+    // fav.push_back("Punjab Kings");
+    // fav.push_back("Rajasthan Royals");
+    // fav.push_back("Delhi Capitals");
+    // fav.push_back("Mumbai Indians");
 }
