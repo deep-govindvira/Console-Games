@@ -166,9 +166,9 @@ struct Match {
         return b.f;
     }
 
-    double diff(Team c) {
-        if(c.name == a.name)    return ((a.run * 1.0 * b.ball) - (a.ball * 1.0 * b.run)) / (a.ball * b.ball);
-        return ((b.run * 1.0 * a.ball) - (b.ball * 1.0 * a.run)) / (a.ball * b.ball);
+    double NRR(Team c) {
+        if(c.name == a.name)    return (((double)(a.run*b.ball)) - ((double)(a.ball*b.run))) / ((double)(a.ball*b.ball));
+        else                     return (((double)(b.run*a.ball)) - ((double)(b.ball*a.run))) / ((double)(a.ball*b.ball));
     }
 
     int run(Team c) {
@@ -506,20 +506,20 @@ struct IPL {
     void update(string q, Match& m) {
         for(int i = 0; i < N; i++) {
             if(g[i].name == m.a.name || g[i].name == m.b.name) {
-                g[i].m++;
                 g[i].w += m.winner.name == g[i].name ? 1 : 0;
                 g[i].l += m.losser.name == g[i].name ? 1 : 0;
                 g[i].r += m.run(g[i]);
                 g[i].b += m.ball(g[i]);
                 g[i].o += m.out(g[i]);
                 g[i].sr = g[i].r * 1.0 / g[i].b;
-                g[i].nrr += m.diff(g[i]);
+                g[i].nrr = (m.NRR(g[i]) + g[i].nrr*g[i].m)/(g[i].m + 1);
                 g[i].pts += m.winner.name == g[i].name ? 2 : m.winner.name == "" ? 1 : 0;
                 g[i].nr += m.winner.name == "" ? 1 : 0;
                 g[i].s += m.six(g[i]);
                 g[i].f += m.four(g[i]);
                 g[i].lr = min(g[i].lr, m.LR(g[i]));
                 g[i].hr = max(g[i].hr, m.HR(g[i]));
+                g[i].m++;
             }
         }
         if(q == "Q")    return;
