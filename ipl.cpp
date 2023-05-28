@@ -4,6 +4,7 @@ using namespace std;
 
 #define N 10
 
+
 int Run();
 
 int sp = 6;
@@ -228,7 +229,7 @@ struct Match {
             a.r += a.run;
             a.b += a.ball;
             s(3);
-            cout << "Ball - " << a.ball << " : " << a.run << "(";
+            cout << "Ball - " << a.ball << " : " << a.run << " (";
             Print_run(cur);
             cout << ")     S.R. = " << a.run * 1.0 / a.ball;
         }
@@ -262,7 +263,7 @@ struct Match {
             b.r += b.run;
             b.b += b.ball;
             s(3);
-            cout << "Ball - " << b.ball << " : " << b.run << "(";
+            cout << "Ball - " << b.ball << " : " << b.run << " (";
             Print_run(cur);
             cout << ")     " << a.run + 1 - b.run << " in " << 6 - b.ball;
             b.nrr = b.r * 1.0 / b.b;
@@ -633,14 +634,26 @@ struct IPL {
     }
 };
 
+void Normal_Match(string a, string b) {
+    Match m(a, b);
+    cout << "\n   ";
+    PrintTeam(a);
+    cout << "  v/s  ";
+    PrintTeam(b);
+    cout << "\n\n";
+    m.Play();
+}
+
+void Play_IPL() {
+   IPL Season_2023;
+   Season_2023.ipl(); 
+}
+
 int main() {
     srand(time(0));
-    IPL Season_2023;
     set_fav();
-    Season_2023.ipl();
-    // Match a("Chennai Super Kings", "Kolkata Knight Riders");
-    // cout << endl;
-    // a.Play();
+    // Normal_Match("Chennai Super Kings", "Gujarat Titans");
+    Play_IPL();
     return 0;
 }
 
