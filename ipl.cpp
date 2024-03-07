@@ -416,6 +416,7 @@ struct IPL {
     void Point_Table(string q) {
         cout << endl;
         s(3);
+        color("Light Purple");
         cout << setw(27) << "Team";
         cout << setw(sp) << "Pts";
         cout << setw(sp) << "NRR";
@@ -433,6 +434,7 @@ struct IPL {
         cout << setw(sp) << "HR";
         cout << setw(sp) << "LR";
         cout << setw(sp + 1) << "OA " << endl << endl;
+        color("White");
         mn_six = g[0].s;
         mn_four = g[0].f;
         mn_run = g[0].r;
