@@ -549,8 +549,9 @@ struct IPL {
         srand(time(0));
         cout << endl; s(3);
         I_P_L();
-        cout << endl;
+        s(1);
         getchar();
+        cout << endl;
         Schedule();
         for(int i = 0; i < m.size(); i++) {
             system("cls");
