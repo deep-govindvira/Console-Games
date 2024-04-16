@@ -168,8 +168,8 @@ struct Match {
     }
 
     double NRR(Team c) {
-        if(c.name == a.name)    return (((double)(a.run*b.ball)) - ((double)(a.ball*b.run))) / ((double)(a.ball*b.ball));
-        else                     return (((double)(b.run*a.ball)) - ((double)(b.ball*a.run))) / ((double)(a.ball*b.ball));
+        if(c.name == a.name)    return (((double)(a.run * b.ball)) - ((double)(a.ball * b.run))) / ((double)(a.ball * b.ball));
+        else                     return (((double)(b.run * a.ball)) - ((double)(b.ball * a.run))) / ((double)(a.ball * b.ball));
     }
 
     int run(Team c) {
@@ -515,7 +515,7 @@ struct IPL {
                 g[i].b += m.ball(g[i]);
                 g[i].o += m.out(g[i]);
                 g[i].sr = g[i].r * 1.0 / g[i].b;
-                g[i].nrr = (m.NRR(g[i]) + g[i].nrr*g[i].m)/(g[i].m + 1);
+                g[i].nrr = (m.NRR(g[i]) + g[i].nrr * g[i].m) / (g[i].m + 1);
                 g[i].pts += m.winner.name == g[i].name ? 2 : m.winner.name == "" ? 1 : 0;
                 g[i].nr += m.winner.name == "" ? 1 : 0;
                 g[i].s += m.six(g[i]);
@@ -648,8 +648,8 @@ void Normal_Match(string a, string b) {
 }
 
 void Play_IPL() {
-   IPL Season_2023;
-   Season_2023.ipl(); 
+    IPL Season_2023;
+    Season_2023.ipl();
 }
 
 int main() {
@@ -950,12 +950,26 @@ void four() {
 }
 
 void set_fav() {
-    fav.push_back("Chennai Super Kings");
+    vector<string> rnd_fav = {
+        "Chennai Super Kings",
+        "Gujarat Titans",
+        "Royal Challengers Bangalore",
+        "Kolkata Knight Riders",
+        "Sunrisers Hyderabad",
+        "Lucknow Super Giants",
+        "Punjab Kings",
+        "Rajasthan Royals",
+        "Delhi Capitals",
+        "Mumbai Indians"
+    };
+    random_shuffle(rnd_fav.begin(), rnd_fav.end());
+    fav.push_back(rnd_fav[rand() % rnd_fav.size()]);
+    // fav.push_back("Chennai Super Kings");
     // fav.push_back("Gujarat Titans");
     // fav.push_back("Royal Challengers Bangalore");
-    // fav.push_back("Sunrisers Hyderabad");
     // fav.push_back("Kolkata Knight Riders");
     // fav.push_back("Lucknow Super Giants");
+    // fav.push_back("Sunrisers Hyderabad");
     // fav.push_back("Punjab Kings");
     // fav.push_back("Rajasthan Royals");
     // fav.push_back("Delhi Capitals");
